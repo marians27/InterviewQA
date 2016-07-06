@@ -1,0 +1,7 @@
+.dropdown-menu-enabled {
+    display: block;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+}

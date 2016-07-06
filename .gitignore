@@ -1,0 +1,9 @@
+backEnd/target/*
+.classpath
+.project
+.settings/*
+*.iml
+backend/.idea/*
+frontEnd/dist/*
+frontEnd/node_modules/*
+frontend/.vscode/*
