@@ -1,26 +1,26 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">InterviewQA</a>
+      <a class="navbar-brand" [routerLink]="['/home']">InterviewQA</a>
     </div>
     <ul class="nav navbar-nav">
       <li class="dropdown">
         <a class="dropdown-toggle" (click)="toogleQuestionsMenu()">Questions</a>
         <ul class="dropdown-menu dropdown-menu-enabled" *ngIf="questionsMenuEnabled">
-          <li><a href="#">Create question</a></li>
-          <li><a href="#">List questions</a></li>
-          <li><a href="#">Categories</a></li> 
+          <li><a [routerLink]="['/questions/create']">Create question</a></li>
+          <li><a [routerLink]="['/questions/list']">List questions</a></li>
+          <li><a [routerLink]="['/questions/categories']">Categories</a></li> 
         </ul>
       </li>
       <li class="dropdown">
         <a class="dropdown-toggle" (click)="toogleTestsMenu()">Tests</a>
         <ul class="dropdown-menu dropdown-menu-enabled" *ngIf="testsMenuEnabled">
-          <li><a href="#">Solve test</a></li>
+          <li><a [routerLink]="['/tests/solve']">Solve test</a></li>
         </ul>
       </li>
     </ul>
   </div>
 </nav>
 <div class="container" (window:click)="hideAll($event)">
-    <h1>Interview questions and answers</h1>
+    <router-outlet></router-outlet>
 </div>
