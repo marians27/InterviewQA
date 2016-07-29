@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Answer} from '../../model/answer';
 import {Question} from '../../model/question';
+import {QuestionService} from '../../services/question.service';
 
 @Component({
     selector: 'question-creator',
@@ -9,7 +10,13 @@ import {Question} from '../../model/question';
 export class QuestionCreator {
     private answers: Array<Answer> = [new Answer()];
     private questionText: String;
-
+    
+    private questionService: QuestionService;
+    
+    constructor(questionService: QuestionService) {
+        this.questionService = questionService;
+    }
+    
     addAnswer(): void {
         this.answers.push(new Answer());
     }
@@ -25,7 +32,7 @@ export class QuestionCreator {
             }
         }
         var question: Question = new Question(this.questionText, correctAnswers, badAnswers);
-        console.log(JSON.stringify(question));
+        this.questionService.createQuestion(question);
     }
 
 

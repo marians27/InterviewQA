@@ -1,0 +1,29 @@
+
+<div class="well well-sm">
+    <div class="row">
+        <div class="lead col-sm-8" style="cursor:pointer" (click)="toggleQuestionPanel()">
+            <strong>{{questionIndex}}. {{question.questionText}}</strong>
+        </div>
+        <div class="text-right col-sm-4" *ngIf="answerVisible">
+            <button type="button" class="btn btn-default" (click)="toggleIncludeWrong()">{{wrongAnswerButton}}</button>
+        </div>
+    </div>
+</div>
+<div>
+    <div *ngIf="answerVisible">
+        <ul class="list-group">
+            <li class="list-group-item alpha-item" *ngFor="let correctAnswer of question.correctAnswers">
+                <div>
+                    <span class="text-medium">{{correctAnswer}}</span>
+                    <span class="label label-success label-right">Correct</span>
+                </div>
+            </li>
+            <li class="list-group-item alpha-item" *ngFor="let badAnswer of calculateBadAnswersList()">
+                <div>
+                    <span class="text-medium">{{badAnswer}}</span>
+                    <span class="label label-danger label-right">Incorrect</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

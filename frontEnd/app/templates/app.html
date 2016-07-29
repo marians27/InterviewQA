@@ -8,7 +8,7 @@
         <a class="dropdown-toggle" (click)="toogleQuestionsMenu()">Questions</a>
         <ul class="dropdown-menu dropdown-menu-enabled" *ngIf="questionsMenuEnabled">
           <li><a [routerLink]="['/questions/create']">Create question</a></li>
-          <li><a [routerLink]="['/questions/list']">List questions</a></li>
+          <li><a [routerLink]="['/questions/list']" [queryParams]="{page: 1, pageSize: 10}">List questions</a></li>
           <li><a [routerLink]="['/questions/categories']">Categories</a></li> 
         </ul>
       </li>

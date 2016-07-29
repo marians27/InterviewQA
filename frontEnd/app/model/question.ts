@@ -8,5 +8,9 @@ export class Question {
         this.correctAnswers = correctAnswers;
         this.badAnswers = badAnswers;
     }
+    
+    getBadAnswers(): Array<String> {
+        return this.badAnswers;
+    }
 
 }

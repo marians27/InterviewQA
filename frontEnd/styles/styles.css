@@ -5,3 +5,17 @@
 .dropdown-toggle {
     cursor: pointer;
 }
+
+.list-group-item.alpha-item {
+    display: list-item;
+    list-style-type: upper-alpha;
+    list-style-position: inside;
+}
+
+.label-right {
+    float: right;
+}
+
+.text-medium {
+    font-size: 16px;
+}

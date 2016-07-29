@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+import {ROUTER_DIRECTIVES } from '@angular/router';
 import {HomePage} from './home/homePage.component';
 import {QuestionList} from './question/questionList.component';
 
