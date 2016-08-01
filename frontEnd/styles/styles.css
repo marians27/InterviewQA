@@ -19,3 +19,25 @@
 .text-medium {
     font-size: 16px;
 }
+
+.disabled-item {
+  color: #a8a8a8;
+}
+
+.text-black {
+    color: black;
+}
+
+option[disabled] {
+  display: none;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.multi-label {
+    margin-right: 5px;
+    line-height: 2.5;
+    font-size: 100%;
+}

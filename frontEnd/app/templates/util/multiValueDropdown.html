@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-sm-6">
+        <select class="form-control" id="sel1" 
+            [class.disabled-item]="isFirstItem()"
+            [(ngModel)]="currentValue" (ngModelChange)=addSelectedValue()>
+            <option value="0" disabled [selected]="isFirstItem()">{{prompt}}</option>
+            <option class="text-black" *ngFor="let value of availableValues" [disabled]="isSelected(value)">
+                {{value}}
+            </option>
+        </select>
+    </div>
+    <div class="col-sm-6">
+        <span class="label label-info multi-label" *ngFor="let category of selectedValues">
+            {{category}}
+            <span class="glyphicon glyphicon-remove clickable" (click)="removeSelectedValue(category)"></span>
+        </span>
+    </div>
+</div>

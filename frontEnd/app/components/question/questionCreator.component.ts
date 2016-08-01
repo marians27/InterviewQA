@@ -1,20 +1,26 @@
 import {Component} from '@angular/core';
 import {Answer} from '../../model/answer';
 import {Question} from '../../model/question';
+import {MultiValueDropdown} from '../util/multiValueDropdown.component';
 import {QuestionService} from '../../services/question.service';
+import {CategoryService} from '../../services/category.service';
 
 @Component({
     selector: 'question-creator',
-    templateUrl: 'app/templates/question/questionCreator.html'
+    templateUrl: 'app/templates/question/questionCreator.html',
+    directives: [MultiValueDropdown]
 })
 export class QuestionCreator {
+    private availableCategories: Array<string>;
     private answers: Array<Answer> = [new Answer()];
     private questionText: String;
+    private categories: Array<String> = [];
     
     private questionService: QuestionService;
     
-    constructor(questionService: QuestionService) {
+    constructor(questionService: QuestionService, categoryService: CategoryService) {
         this.questionService = questionService;
+        this.availableCategories = categoryService.loadCategoryLabels();
     }
     
     addAnswer(): void {
@@ -31,7 +37,7 @@ export class QuestionCreator {
                 badAnswers.push(answer.answerText);
             }
         }
-        var question: Question = new Question(this.questionText, correctAnswers, badAnswers);
+        var question: Question = new Question(this.questionText, correctAnswers, badAnswers, this.categories);
         this.questionService.createQuestion(question);
     }
 

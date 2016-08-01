@@ -16,6 +16,14 @@ export class CategoryService {
         return this.categories;
     }
     
+    loadCategoryLabels(): Array<string> {
+        let labels: Array<string> = [];
+        for (let category of this.categories) {
+            labels.push(category.getName());
+        }
+        return labels;
+    }
+    
     addNewCategory(category: Category): void {
         for(let cat of this.categories) {
             if (cat.getName() == category.getName()) {

@@ -7,6 +7,16 @@
                 <input type="text" class="form-control" id="question"  [(ngModel)]="questionText" placeholder="Enter question">
             </div>
         </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="question">Category:</label>
+            <div class="col-sm-10">
+                <multi-value-dropdown 
+                    [availableValues]="availableCategories"
+                    [prompt]="'Select category'"
+                    [selectedValues]="categories">
+                </multi-value-dropdown>
+            </div>
+        </div>
         <div class="form-group row" *ngFor="let a of answers; let i=index">
             <label class="control-label col-sm-2" attr.for="answer-{{i}}">Answer:</label>
             <div class="col-sm-5"> 
