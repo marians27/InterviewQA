@@ -7,7 +7,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import pl.iqa.model.error.OperationError;
 import pl.iqa.model.error.ValidationError;
+import pl.iqa.repository.exceptions.EntityExistsException;
+import pl.iqa.services.exception.CustomValidationException;
+import pl.iqa.services.exception.EntityNotFoundException;
 
 import java.util.List;
 
@@ -19,12 +23,40 @@ public class RestControllerErrorHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public List<ValidationError> processValidationError(MethodArgumentNotValidException exception) {
+    public List<ValidationError> handleValidationError(MethodArgumentNotValidException exception) {
         List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
 
         return fieldErrors.stream()
                 .map(this::processFieldError)
                 .collect(toList());
+    }
+
+    @ExceptionHandler(CustomValidationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ValidationError handleCustomValidationException(CustomValidationException exception) {
+        return new ValidationError(exception.getField(), exception.getMessage());
+    }
+
+    @ExceptionHandler(EntityExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ResponseBody
+    public OperationError handleEntityExistsException(EntityExistsException exception) {
+        return new OperationError(exception.getMessage());
+    }
+
+    @ExceptionHandler(UnsupportedOperationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public OperationError handleUnsupportedOperationException(UnsupportedOperationException exception) {
+        return new OperationError(exception.getMessage());
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public OperationError handleEntityNotFoundException(EntityNotFoundException exception) {
+        return new OperationError(exception.getMessage());
     }
 
     private ValidationError processFieldError(FieldError fieldError) {

@@ -1,9 +1,11 @@
 package pl.iqa.services;
 
+import com.google.common.base.Joiner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.iqa.model.question.Question;
 import pl.iqa.repository.QuestionRepository;
+import pl.iqa.services.exception.CustomValidationException;
 
 import java.util.List;
 
@@ -17,6 +19,9 @@ public class QuestionService {
 
     @Autowired
     private QuestionRepository questionRepository;
+
+    @Autowired
+    private CategoryService categoryService;
 
     public List<Question> retrieveQuestions(Integer pageNumberParam, Integer pageSizeParam) {
         int pageNumber = firstNonNull(pageNumberParam, DEFAULT_PAGE_NUMBER);
@@ -35,6 +40,11 @@ public class QuestionService {
     }
 
     public void createQuestion(Question question) {
+        List<String> notExistingCategories = categoryService.notExistingCategories(question.getCategories());
+        if (!notExistingCategories.isEmpty()) {
+            throw new CustomValidationException("categories",
+                    "Categories " + Joiner.on(", ").join(notExistingCategories) + " do not exists");
+        }
         questionRepository.createQuestion(question);
     }
 
