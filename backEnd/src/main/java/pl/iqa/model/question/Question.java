@@ -1,6 +1,7 @@
 package pl.iqa.model.question;
 
 import pl.iqa.model.question.validation.AtLeastOneCorrect;
+import pl.iqa.model.question.validation.UniqueElements;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -16,8 +17,8 @@ public class Question {
     @Valid
     private List<Answer> answers;
 
-    @Valid
-    private List<Category> categories;
+    @UniqueElements
+    private List<String> categories;
 
     public String getQuestionText() {
         return questionText;
@@ -35,11 +36,11 @@ public class Question {
         this.answers = answers;
     }
 
-    public List<Category> getCategories() {
+    public List<String> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<Category> categories) {
+    public void setCategories(List<String> categories) {
         this.categories = categories;
     }
 

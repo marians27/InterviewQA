@@ -35,7 +35,7 @@ public class EmbeddedJetty {
 
     private ClassInheritanceMap createClassInheritanceMap() {
         ClassInheritanceMap map = new ClassInheritanceMap();
-        ConcurrentHashSet set = new ConcurrentHashSet();
+        ConcurrentHashSet<String> set = new ConcurrentHashSet<>();
         set.add(IqaWebApplicationInitializer.class.getName());
         map.put(WebApplicationInitializer.class.getName(), set);
         return map;
